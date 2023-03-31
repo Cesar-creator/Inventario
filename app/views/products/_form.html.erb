@@ -1,0 +1,36 @@
+<%= form_with(model: product) do |form| %>
+  <% if product.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(product.errors.count, "error") %> No se puede guardar ese tipo de producto:</h2>
+      <ul>
+        <% product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :nombre, style: "display: block" %>
+    <%= form.text_field :nombre %>
+  </div>
+  <div>
+    <%= form.label :descripcion, style: "display: block" %>
+    <%= form.text_area :descripcion %>
+  </div>
+  <div>
+    <%= form.label :cantidad, style: "display: block" %>
+    <%= form.number_field :cantidad %>
+  </div>
+  <div>
+    <%= form.label :fechaVencimiento, style: "display: block" %>
+    <%= form.text_field :fechaVencimiento %>
+  </div>
+  <%= form.collection_select :category_id, Category.all.order(nombre: :asc), :id, :nombre%>
+  <div>
+    <%= form.label :foto, style: "display: block" %>
+    <%= form.file_field :foto %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
