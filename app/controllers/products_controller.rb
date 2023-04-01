@@ -4,7 +4,9 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all.with_attached_foto.order(created_at: :desc).load_async
+    @Categories = Category.all
+    @Proveedors = Proveedor.all
+    @products = Product.all.with_attached_foto.order(created_at: :asc).load_async
   end
 
   # GET /products/1 or /products/1.json
@@ -37,7 +39,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to product_url(@product), notice: "El Producto ha sido Actualizado." }
+        format.html { redirect_to products_url, notice: "El Producto ha sido Actualizado." }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -62,6 +64,6 @@ class ProductsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def product_params
-    params.require(:product).permit(:nombre, :descripcion, :cantidad, :fechaVencimiento, :foto, :category_id)
+    params.require(:product).permit(:nombre, :descripcion, :cantidad, :fechaVencimiento, :foto, :category_id, :proveedor_id)
   end
 end

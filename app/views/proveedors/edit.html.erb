@@ -1,0 +1,9 @@
+<div class="flex justify-center h-auto bg-indigo-500 min-h-screen">
+  <div class="w-96 p-6 shadow-lg bg-white rounded-md mt-10 mb-5 h-fit">
+    <div>
+      <%= link_to "Volver", proveedors_path, class: "hover:text-indigo-600" %>
+    </div>
+    <h3 class="text-center mt-3 text-2xl mb-3">Editando PROVEEDOR</h3>
+    <%= render "form", proveedor: @proveedor %>
+  </div>
+</div>

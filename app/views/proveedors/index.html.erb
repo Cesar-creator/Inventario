@@ -4,12 +4,12 @@
       <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Productos", products_path %></li>
       <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Categorias", categories_path %></li>
       <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Proveedores", proveedors_path %></li>
-      <li class="mb-8 text-white hover:font-bold">Reportes</li>
+      <li class="mb-8 text-white hover:font-bold hover:cursor-pointer">Reportes</li>
     </ul>
   </div>
   <div class="container mx-auto overflow-x-auto">
     <p style="color: green"><%= notice %></p>
-    <h2 class="text-center mt-3 text-2xl">CATEGORIAS</h2>
+    <h2 class="text-center mt-3 text-2xl">PROVEEDORES</h2>
     <div class="relative overflow-x-auto m-5">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border-4">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -26,17 +26,17 @@
           </tr>
         </thead>
         <tbody>
-          <% @categories.each do |category| %>
+          <% @proveedors.each do |proveedor| %>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <%= category.id %>
+                <%= proveedor.id %>
               </th>
               <td class="px-6 py-4">
-                <%= category.nombre %>
+                <%= proveedor.nombre %>
               </td>
               <td class="px-6 py-4">
-                <%= link_to "Editar", edit_category_path(category), class: "mr-1 hover:text-indigo-600"%>
-                <%= link_to "Eliminar", category_path(category), data: {
+                <%= link_to "Editar", edit_proveedor_path(proveedor), class: "mr-1 hover:text-indigo-600"%>
+                <%= link_to "Eliminar", proveedor_path(proveedor), data: {
       turbo_method: :delete,
       turbo_confirm: "¿Estás Seguro?"
     }, class: "mr-1 hover:text-indigo-600"%>
@@ -48,7 +48,7 @@
     </div>
     <div class="flex justify-center mt-5">
       <div>
-        <%= link_to "Crear Categoria", new_category_path, class: "border-2 border-indigo-700 w-full px-8 py-2 text-white bg-indigo-700 rounded-md hover:bg-indigo-500 hover:border-indigo-500" %>
+        <%= link_to "Crear Proveedor", new_proveedor_path, class: "border-2 border-indigo-700 w-full px-8 py-2 text-white bg-indigo-700 rounded-md hover:bg-indigo-500 hover:border-indigo-500" %>
       </div>
     </div>
   </div>

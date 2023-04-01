@@ -18,6 +18,6 @@ class Authentication::SessionsController < ApplicationController
   def destroy
     session.delete(:user_id)
 
-    redirect_to products_path, notice: "Sessión Cerrada"
+    redirect_to new_session_path, notice: "Sessión Cerrada"
   end
 end

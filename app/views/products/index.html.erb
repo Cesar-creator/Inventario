@@ -1,13 +1,84 @@
-<p style="color: green"><%= notice %></p>
-<h1>Productos</h1>
-<div id="products">
-  <% @products.each do |product| %>
-    <h2><%= product.nombre %></h2>
-    <p>Cantidad: <%= product.cantidad %></p>
-    <p>Fecha de Vencimiento: <%= product.fechaVencimiento %></p>
-    <p>
-      <%= link_to "Detalles", product %>
-    </p>
-  <% end %>
+<div class="flex h-screen">
+  <div class="p-6 border-r w-64 border-indigo-900 bg-indigo-500">
+    <ul>
+      <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Productos", products_path %></li>
+      <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Categorias", categories_path %></li>
+      <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Proveedores", proveedors_path %></li>
+      <li class="mb-8 text-white hover:font-bold">Reportes</li>
+    </ul>
+  </div>
+  <div class="container mx-auto overflow-x-auto">
+    <p style="color: green"><%= notice %></p>
+    <h2 class="text-center mt-3 text-2xl">PRODUCTOS</h2>
+    <div class="relative overflow-x-auto m-5">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border-4">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" class="px-6 py-3">
+              ID
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Nombre
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Cantidad
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Fecha de Vencimiento 
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Categoria
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Proveedor
+            </th>
+            <th scope="col" class="px-6 py-3 text-center">
+              Acciones
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+            <% @Categories.each do |category| %>
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <%= product.id %>
+                </th>
+                <td class="px-6 py-4">
+                  <%= product.nombre %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= product.cantidad %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= product.fechaVencimiento %>
+                </td>
+                <td class="px-6 py-4">
+                  <% if product.category_id = category.id %>
+                    <%= category.nombre %>
+                  <% end %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= product.proveedor_id %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= link_to "Detalles", product_path(product), class: "mr-1 hover:text-indigo-600" %>
+                  <%= link_to "Editar", edit_product_path(product), class: "mr-1 hover:text-indigo-600"%>
+                  <%= link_to "Eliminar", product_path(product), data: {
+      turbo_method: :delete,
+      turbo_confirm: "¿Estás Seguro?"
+    }, class: "hover:text-indigo-600"%>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="flex justify-center mt-5">
+      <div>
+        <%= link_to "Crear Producto", new_product_path, class: "border-2 border-indigo-700 w-full px-8 py-2 text-white bg-indigo-700 rounded-md hover:bg-indigo-500 hover:border-indigo-500" %>
+      </div>
+    </div>
+  </div>
 </div>
-<%= link_to "Crear Producto", new_product_path %>

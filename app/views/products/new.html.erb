@@ -1,6 +1,9 @@
-<h1>Nuevo Producto</h1>
-<%= render "form", product: @product %>
-<br>
-<div>
-  <%= link_to "Volver", products_path %>
+<div class="flex justify-center items-center h-auto bg-indigo-500 min-h-screen">
+  <div class="w-96 p-6 shadow-lg bg-white rounded-md mt-5 mb-5">
+    <div>
+      <%= link_to "Volver", products_path, class: "hover:text-indigo-600" %>
+    </div>
+    <h3 class="text-center mt-3 text-2xl">Nuevo Producto</h3>
+    <%= render "form", product: @product %>
+  </div>
 </div>
