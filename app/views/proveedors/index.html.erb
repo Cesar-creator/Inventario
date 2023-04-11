@@ -2,8 +2,9 @@
   <div class="p-6 border-r w-64 border-indigo-900 bg-indigo-500">
     <ul>
       <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Productos", products_path %></li>
-      <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Categorias", categories_path %></li>
-      <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Proveedores", proveedors_path %></li>
+      <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Categorias", categories_path if Current.user&.admin? %></li>
+      <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Proveedores", proveedors_path if Current.user&.admin? %></li>
+      <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Usuarios", users_path if Current.user&.admin? %></li>
       <li class="mb-8 text-white hover:font-bold hover:cursor-pointer">Reportes</li>
     </ul>
   </div>

@@ -10,9 +10,9 @@
     <hr class="mt-2 h-1 bg-indigo-500">
     <div>
       <div class="flex justify-center mt-4">
-        <%= link_to "Editar", edit_product_path(@product), class: "hover:text-indigo-600 mr-4" %> | <%= button_to "Eliminar", @product, method: :delete, data: {
+        <%= link_to "Editar", edit_product_path(@product), class: "hover:text-indigo-600 mr-4" if Current.user&.admin?%>  <%= button_to "Eliminar", @product, method: :delete, data: {
     turbo_confirm: '¿Estás seguro?'
-  }, class: "hover:text-indigo-600 ml-4"%>
+  }, class: "hover:text-indigo-600 ml-4" if Current.user&.admin?%>
       </div>
     </div>
   </div>

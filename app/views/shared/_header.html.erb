@@ -3,8 +3,9 @@
     <h1 class="text-2xl font-bold text-white">INVENTARIO</h1>
     <div>
       <%= link_to "Productos", products_path, class: "mx-2 text-white hover:font-bold" if Current.user%>
-      <%= link_to "Categorias", categories_path, class: "mx-2 text-white hover:font-bold" if Current.user%>
-      <%= link_to "Proveedores", proveedors_path, class: "mx-2 text-white hover:font-bold" if Current.user%>
+      <%= link_to "Categorias", categories_path, class: "mx-2 text-white hover:font-bold" if Current.user&.admin?%>
+      <%= link_to "Proveedores", proveedors_path, class: "mx-2 text-white hover:font-bold" if Current.user&.admin?%>
+      <%= link_to "Usuarios", users_path, class: "mx-2 text-white hover:font-bold" if Current.user&.admin?%>
       <%= link_to "Login", new_session_path, class: "mx-2 text-white hover:font-bold" unless Current.user %>
       <%= link_to "Register", new_user_path, class: "mx-2 text-white hover:font-bold" unless Current.user%>
       <%= link_to "Cerrar Sesión", session_path(Current.user.id), data: {

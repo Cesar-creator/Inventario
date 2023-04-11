@@ -12,6 +12,7 @@ class User < ApplicationRecord
                          with: /\A[a-z0-9A-Z]+\z/,
                          message: :invalid,
                        }
+  # Si requiero mas usuarios admin, comentar la validacion de password.
   validates :password, length: { minimum: 6 }
 
   before_save :downcase_attributes

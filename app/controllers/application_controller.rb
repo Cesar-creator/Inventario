@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Authorization
   before_action :set_current_user
   before_action :protect_pages
 

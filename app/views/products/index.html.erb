@@ -2,8 +2,9 @@
   <div class="p-6 border-r w-64 border-indigo-900 bg-indigo-500">
     <ul>
       <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Productos", products_path %></li>
-      <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Categorias", categories_path %></li>
-      <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Proveedores", proveedors_path %></li>
+      <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Categorias", categories_path if Current.user&.admin?%></li>
+      <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Proveedores", proveedors_path if Current.user&.admin?%></li>
+      <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Usuarios", users_path if Current.user&.admin? %></li>
       <li class="mb-8 text-white hover:font-bold">Reportes</li>
     </ul>
   </div>
@@ -39,38 +40,34 @@
         </thead>
         <tbody>
           <% @products.each do |product| %>
-            <% @Categories.each do |category| %>
-              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  <%= product.id %>
-                </th>
-                <td class="px-6 py-4">
-                  <%= product.nombre %>
-                </td>
-                <td class="px-6 py-4">
-                  <%= product.cantidad %>
-                </td>
-                <td class="px-6 py-4">
-                  <%= product.fechaVencimiento %>
-                </td>
-                <td class="px-6 py-4">
-                  <% if product.category_id = category.id %>
-                    <%= category.nombre %>
-                  <% end %>
-                </td>
-                <td class="px-6 py-4">
-                  <%= product.proveedor_id %>
-                </td>
-                <td class="px-6 py-4">
-                  <%= link_to "Detalles", product_path(product), class: "mr-1 hover:text-indigo-600" %>
-                  <%= link_to "Editar", edit_product_path(product), class: "mr-1 hover:text-indigo-600"%>
-                  <%= link_to "Eliminar", product_path(product), data: {
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <%= product.id %>
+              </th>
+              <td class="px-6 py-4">
+                <%= product.nombre %>
+              </td>
+              <td class="px-6 py-4">
+                <%= product.cantidad %>
+              </td>
+              <td class="px-6 py-4">
+                <%= product.fechaVencimiento %>
+              </td>
+              <td class="px-6 py-4">
+                <%= search_cat_name(product.category_id) %>
+              </td>
+              <td class="px-6 py-4">
+                <%= search_provider_name(product.proveedor_id) %>
+              </td>
+              <td class="px-6 py-4 flex">
+                <%= link_to "Detalles", product_path(product), class: "mr-1 hover:text-indigo-600" %>
+                <%= link_to "Editar", edit_product_path(product), class: "mr-1 ml-1 hover:text-indigo-600" if Current.user&.admin?%>
+                <%= link_to "Eliminar", product_path(product), data: {
       turbo_method: :delete,
       turbo_confirm: "¿Estás Seguro?"
-    }, class: "hover:text-indigo-600"%>
-                </td>
-              </tr>
-            <% end %>
+    }, class: " ml-1 hover:text-indigo-600" if Current.user&.admin?%>
+              </td>
+            </tr>
           <% end %>
         </tbody>
       </table>
