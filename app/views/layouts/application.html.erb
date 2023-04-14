@@ -13,5 +13,6 @@
     <%= render 'shared/flash'%>
     <%= render 'shared/header'%>
     <%= yield %>
+    <%= turbo_frame_tag "modal"%>
   </body>
 </html>

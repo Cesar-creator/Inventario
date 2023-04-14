@@ -7,13 +7,60 @@
     <div class="flex justify-center">
       <%= image_tag @product.foto, width: 200 if @product.foto.attached?%>
     </div>
-    <hr class="mt-2 h-1 bg-indigo-500">
+    <br>
     <div>
-      <div class="flex justify-center mt-4">
-        <%= link_to "Editar", edit_product_path(@product), class: "hover:text-indigo-600 mr-4" if Current.user&.admin?%>  <%= button_to "Eliminar", @product, method: :delete, data: {
+      <h2 class="text-center mt-3 text-2xl">Movimientos del Producto</h2>
+      <div class="relative overflow-x-auto m-5">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border-4">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="px-6 py-3">
+                Tipo
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Cantidad
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Comentario
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Fecha de Expiración
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Fecha/Hora
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @product.movements.each do |movement| %>
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <td class="px-6 py-4">
+                  <%= movement.movement_type_name %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= movement.quantity %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= movement.comment %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= movement.fecha_expiracion %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= movement.created_at %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <hr class="mt-2 h-1 bg-indigo-500">
+      <div>
+        <div class="flex justify-center mt-4">
+          <%= link_to "Editar", edit_product_path(@product), class: "hover:text-indigo-600 mr-4" if Current.user&.admin?%>  <%= button_to "Eliminar", @product, method: :delete, data: {
     turbo_confirm: '¿Estás seguro?'
   }, class: "hover:text-indigo-600 ml-4" if Current.user&.admin?%>
+        </div>
       </div>
     </div>
   </div>
-</div>

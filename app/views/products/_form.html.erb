@@ -10,20 +10,12 @@
     </div>
   <% end %>
   <div>
-    <%= form.label :nombre, style: "display: block", class: "mt-3" %>
+    <%= form.label "Nombre", style: "display: block", class: "mt-3" %>
     <%= form.text_field :nombre, class: "border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600 mt-1", placeholder: "Nombre Completo" %>
   </div>
   <div>
-    <%= form.label :descripcion, style: "display: block", class: "mt-3" %>
+    <%= form.label "Descripción", style: "display: block", class: "mt-3" %>
     <%= form.text_area :descripcion, class: "border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600 mt-1", placeholder: "Descripcion del Producto" %>
-  </div>
-  <div>
-    <%= form.label :cantidad, style: "display: block", class: "mt-3" %>
-    <%= form.number_field :cantidad, class: "border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600 mt-1", placeholder: "Cantidad del Producto"%>
-  </div>
-  <div>
-    <%= form.label :fechaVencimiento, style: "display: block", class: "mt-3" %>
-    <%= form.text_field :fechaVencimiento, class: "border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600 mt-1", placeholder: "Fecha de Vencimiento" %>
   </div>
   <div>
     <%= form.label "Seleccionar Categoria", style: "display: block", class: "mt-3 mb-1" %>
@@ -38,6 +30,6 @@
     <%= form.file_field :foto, class: "mt-1" %>
   </div>
   <div>
-    <%= form.submit "Terminar Producto", class: "border-2 border-indigo-700 bg-indigo-700 text-white py-1 w-full rounded-md hover:bg-transparent hover:text-indigo-700 font-semibold mt-5 cursor-pointer" %>
+    <%= form.submit "Finalizar Producto", class: "border-2 border-indigo-700 bg-indigo-700 text-white py-1 w-full rounded-md hover:bg-transparent hover:text-indigo-700 font-semibold mt-5 cursor-pointer" %>
   </div>
 <% end %>

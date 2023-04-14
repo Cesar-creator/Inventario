@@ -1,16 +1,9 @@
-<div class="flex justify-center items-center h-auto bg-indigo-500 min-h-screen">
-  <div class="w-96 p-6 shadow-lg bg-white rounded-md mt-5 mb-5">
-    <%= link_to "Volver", products_path, class: "hover:text-indigo-600" %> | <%= link_to "Detalles", @product, class: "hover:text-indigo-600" %>
-    <h3 class="text-center mt-3 text-2xl">Editando Producto</h3>
-    <%= render "form", product: @product %>
-  </div>
-</div>
 <%= turbo_frame_tag "modal" do %>
   <div data-controller="modal">
     <div data-action="click->modal#close" class="fixed z-10 w-full h-full top-0 left-0 bg-black bg-opacity-40"></div>
     <div data-modal-target="sidebar" class="fixed top-0 right-0 z-20 w-1/2 sm:w-3/6 lg:w-2/6 h-full bg-white overflow-y-scroll shadow flex flex-col ease-in-out duration-300 p-5 translate-x-full">
       <p data-action="click->modal#close">❌</p>
-      <h3 class="text-center mt-3 text-2xl">Editando Producto</h3>
+      <h3 class="text-center mt-3 text-2xl">Suministracion del Producto</h3>
       <%= render "form", product: @product %>
     </div>
   </div>

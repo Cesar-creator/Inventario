@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_11_163520) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_14_223825) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,18 +48,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_11_163520) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "movements", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.integer "movement_type"
+    t.integer "quantity"
+    t.text "comment"
+    t.date "fecha_expiracion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_movements_on_product_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "nombre", null: false
     t.text "descripcion"
-    t.integer "cantidad", null: false
-    t.string "fechaVencimiento", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "category_id", null: false
     t.bigint "proveedor_id", null: false
-    t.date "fechaExpiracion"
-    t.integer "cantidadMinima"
-    t.integer "cantidadActual"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["proveedor_id"], name: "index_products_on_proveedor_id"
   end
@@ -83,6 +89,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_11_163520) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "movements", "products"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "proveedors"
 end

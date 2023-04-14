@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   end
 
   resources :categories, except: :show
-  resources :products
+  resources :products do
+    member do
+      get :new_movement
+      post :create_movement
+    end
+  end
   resources :proveedors, except: :show
 end

@@ -22,10 +22,7 @@
               Nombre
             </th>
             <th scope="col" class="px-6 py-3">
-              Cantidad
-            </th>
-            <th scope="col" class="px-6 py-3">
-              Fecha de Vencimiento 
+              Cantidad 
             </th>
             <th scope="col" class="px-6 py-3">
               Categoria
@@ -48,10 +45,7 @@
                 <%= product.nombre %>
               </td>
               <td class="px-6 py-4">
-                <%= product.cantidad %>
-              </td>
-              <td class="px-6 py-4">
-                <%= product.fechaVencimiento %>
+                <%= product.quantity%>
               </td>
               <td class="px-6 py-4">
                 <%= search_cat_name(product.category_id) %>
@@ -60,12 +54,20 @@
                 <%= search_provider_name(product.proveedor_id) %>
               </td>
               <td class="px-6 py-4 flex">
-                <%= link_to "Detalles", product_path(product), class: "mr-1 hover:text-indigo-600" %>
-                <%= link_to "Editar", edit_product_path(product), class: "mr-1 ml-1 hover:text-indigo-600" if Current.user&.admin?%>
-                <%= link_to "Eliminar", product_path(product), data: {
+                <div class="flex">
+                  <div>
+                    <%= link_to "Detalles", product_path(product), class: "mr-1 hover:text-indigo-600" %>
+                    <%= link_to "Editar", edit_product_path(product), class: "mr-1 ml-1 hover:text-indigo-600" if Current.user&.admin?%>
+                    <%= link_to "Crear Movimiento", new_movement_product_path(product), class: "mr-1 ml-1 hover:text-indigo-600" %>
+                  </div>
+                  <div>
+                    <%= link_to "Eliminar", product_path(product), data: {
       turbo_method: :delete,
       turbo_confirm: "¿Estás Seguro?"
     }, class: " ml-1 hover:text-indigo-600" if Current.user&.admin?%>
+                    <%= link_to "Comprar", edit_product_path(product), class: "mr-1 ml-1 hover:text-indigo-600", data: {turbo_frame: "modal"} if Current.user&.admin?%>
+                  </div>
+                </div>
               </td>
             </tr>
           <% end %>
