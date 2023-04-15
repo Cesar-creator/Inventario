@@ -5,7 +5,6 @@
       <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Categorias", categories_path if Current.user&.admin?%></li>
       <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Proveedores", proveedors_path if Current.user&.admin?%></li>
       <li class="mb-8 text-white hover:font-bold hover:cursor-pointer"><%= link_to "Usuarios", users_path if Current.user&.admin? %></li>
-      <li class="mb-8 text-white hover:font-bold">Reportes</li>
     </ul>
   </div>
   <div class="container mx-auto overflow-x-auto">
@@ -55,7 +54,7 @@
               </td>
               <td class="px-6 py-4 flex">
                 <div class="flex">
-                  <div>
+                  <div class="flex">
                     <%= link_to "Detalles", product_path(product), class: "mr-1 hover:text-indigo-600" %>
                     <%= link_to "Editar", edit_product_path(product), class: "mr-1 ml-1 hover:text-indigo-600" if Current.user&.admin?%>
                     <%= link_to "Crear Movimiento", new_movement_product_path(product), class: "mr-1 ml-1 hover:text-indigo-600" %>
@@ -77,6 +76,9 @@
     <div class="flex justify-center mt-5">
       <div>
         <%= link_to "Crear Producto", new_product_path, class: "border-2 border-indigo-700 w-full px-8 py-2 text-white bg-indigo-700 rounded-md hover:bg-indigo-500 hover:border-indigo-500" %>
+        <a href="<%= products_path(format: :xlsx) %>" class="border-2 border-indigo-700 w-full px-8 py-2 text-white bg-indigo-700 rounded-md hover:bg-indigo-500 hover:border-indigo-500">
+          <span>Exportar a Excel</span>
+        </a>
       </div>
     </div>
   </div>

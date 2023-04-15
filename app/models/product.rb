@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   has_one_attached :foto
-  has_many :movements
+  has_many :movements, :dependent => :destroy
 
   validates :nombre, presence: true
 

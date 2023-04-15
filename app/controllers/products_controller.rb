@@ -4,13 +4,24 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @Categories = Category.all
-    @Proveedors = Proveedor.all
     @products = Product.all.with_attached_foto.order(created_at: :asc).load_async
+    respond_to do |format|
+      format.html
+      format.xlsx {
+        render xlsx: "index", filename: "Listado de productos.xlsx"
+        #response.headers["Content-Disposition"] = 'attachment; filename="Listado de productos.xlsx"'
+      }
+    end
   end
 
   # GET /products/1 or /products/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.xlsx {
+        response.headers["Content-Disposition"] = "attachment; filename=\"Listado de movimientos - #{@product.id}.xlsx\""
+      }
+    end
   end
 
   # GET /products/new

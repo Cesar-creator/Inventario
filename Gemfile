@@ -72,3 +72,14 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 2.0"
+
+gem 'rubyzip', '~> 2'
+gem 'caxlsx'
+gem 'caxlsx_rails'
+
+
+#gem 'rubyzip', '~> 1.1.7'
+#gem 'axlsx_rails'
+#gem 'axlsx', '~> 2.1.0.pre'
+
+
