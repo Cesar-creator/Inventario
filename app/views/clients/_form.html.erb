@@ -1,0 +1,27 @@
+<%= form_with(model: client, class: "contents") do |form| %>
+  <% if client.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(client.errors.count, "error") %> No se puede registrar este tipo de Cliente.</h2>
+      <ul>
+        <% client.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="my-5">
+    <%= form.label "Cedula del Cliente" %>
+    <%= form.number_field :cedula, class:"border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600 mt-1", placeholder:"Número de Documento"%>
+  </div>
+  <div class="my-5">
+    <%= form.label "Dirección del Cliente" %>
+    <%= form.text_field :direccion, class:"border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600 mt-1", placeholder:"Direccion del Cliente"%>
+  </div>
+  <div class="my-5">
+    <%= form.label "Telefono del Cliente" %>
+    <%= form.number_field :telefono, class:"border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600 mt-1", placeholder:"Número de Telefono"%>
+  </div>
+  <div class="inline">
+    <%= form.submit "Registrar Usuario", class:"border-2 border-indigo-700 bg-indigo-700 text-white py-1 w-full rounded-md hover:bg-transparent hover:text-indigo-700 font-semibold mt-5 cursor-pointer" %>
+  </div>
+<% end %>

@@ -1,16 +1,24 @@
 <div class="flex justify-center h-auto bg-indigo-500 min-h-screen">
-  <div class="w-96 p-6 shadow-lg bg-white rounded-md mt-10 mb-5 h-fit">
-    <p style="color: green"><%= notice %></p>
-    <%= link_to "Volver", products_path, class: "hover:text-indigo-600" %>
-    <h3 class="text-center mt-1 mb-3 text-2xl"><%= @product.nombre %></h3>
-    <%= render @product %>
-    <div class="flex justify-center">
-      <%= image_tag @product.foto, width: 200 if @product.foto.attached?%>
-    </div>
-    <br>
+  <div class="w-auto py-6 px-10 pr-0 shadow-lg bg-white rounded-md mt-10 mb-5 h-fit flex">
     <div>
+      <p style="color: green"><%= notice %></p>
+      <%= link_to "Volver", products_path, class: "hover:text-indigo-600" %>
+      <h3 class="text-center mt-1 mb-3 text-2xl"><%= @product.nombre %></h3>
+      <%= render @product %>
+      <div class="flex justify-center">
+        <%= image_tag @product.foto, width: 200 if @product.foto.attached?%>
+      </div>
+      <hr class="mt-2 h-1 bg-indigo-500">
+      <div class="flex justify-center mt-2">
+        <%= link_to "Editar", edit_product_path(@product), class: "border-2 border-indigo-700 px-8 py-2 text-white bg-indigo-700 rounded-md hover:bg-indigo-500 hover:border-indigo-500" if Current.user&.admin?%>
+        <%= button_to "Eliminar", @product, method: :delete, data: {
+    turbo_confirm: '¿Estás seguro?'
+  }, class: "border-2 border-indigo-700 mx-4 px-4 py-2 text-white bg-indigo-700 rounded-md hover:bg-indigo-500 hover:border-indigo-500" if Current.user&.admin?%>
+      </div>
+    </div>
+    <div class="pl-2">
       <h2 class="text-center mt-3 text-2xl">Movimientos del Producto</h2>
-      <div class="relative overflow-x-auto m-5">
+      <div class="relative overflow-x-auto overflow-y-auto m-5 w-min max-h-64">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border-4">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -19,6 +27,12 @@
               </th>
               <th scope="col" class="px-6 py-3">
                 Cantidad
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Proveedor
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Cliente
               </th>
               <th scope="col" class="px-6 py-3">
                 Comentario
@@ -41,10 +55,26 @@
                   <%= movement.quantity %>
                 </td>
                 <td class="px-6 py-4">
+                  <%= search_prov_name(movement.proveedor_id) %>
+                </td>
+                <td class="px-6 py-4">
+                  <% if movement.client_id == nil%>
+                    <p>No aplica</p>
+                  <% else %>
+                    <%= search_client_cedula(movement.client_id) %>
+                  <% end %>
+                </td>
+                <td class="px-6 py-4">
                   <%= movement.comment %>
                 </td>
                 <td class="px-6 py-4">
-                  <%= movement.fecha_expiracion %>
+                  <% if movement.fecha_expiracion == nil %>
+                    <p>Ninguno</p>
+                  <% elsif movement.fecha_expiracion > Date.today %>
+                    <%= tag.span(distance_of_time_in_words(Date.today, movement.fecha_expiracion) + " restantes", class: 'text-green-700') %>
+                  <% else %>
+                    <%= tag.span(distance_of_time_in_words(Date.today, movement.fecha_expiracion) + " expirados", class: 'text-red-700') %>
+                  <% end %>
                 </td>
                 <td class="px-6 py-4">
                   <%= movement.created_at %>
@@ -54,14 +84,9 @@
           </tbody>
         </table>
       </div>
-      <hr class="mt-2 h-1 bg-indigo-500">
       <div>
         <div class="flex justify-center mt-4">
-          <%= link_to "Editar", edit_product_path(@product), class: "hover:text-indigo-600 mr-4" if Current.user&.admin?%>
-          <%= button_to "Eliminar", @product, method: :delete, data: {
-    turbo_confirm: '¿Estás seguro?'
-  }, class: "hover:text-indigo-600 ml-4" if Current.user&.admin?%>
-          <%= link_to 'Exportar a Excel', product_path(@product, format: :xlsx), class: "border-2 border-indigo-700 w-full px-8 py-2 text-white bg-indigo-700 rounded-md hover:bg-indigo-500 hover:border-indigo-500"%>
+          <%= link_to 'Exportar a Excel', product_path(@product, format: :xlsx), class: "border-2 border-indigo-700 px-8 py-2 text-white bg-indigo-700 rounded-md hover:bg-indigo-500 hover:border-indigo-500"%>
         </div>
       </div>
     </div>

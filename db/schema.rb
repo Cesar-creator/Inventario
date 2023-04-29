@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_14_223825) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_29_175348) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_223825) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "clients", force: :cascade do |t|
+    t.bigint "cedula"
+    t.string "direccion"
+    t.bigint "telefono"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "movements", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.integer "movement_type"
@@ -56,7 +64,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_223825) do
     t.date "fecha_expiracion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "proveedor_id", null: false
+    t.bigint "client_id"
+    t.index ["client_id"], name: "index_movements_on_client_id"
     t.index ["product_id"], name: "index_movements_on_product_id"
+    t.index ["proveedor_id"], name: "index_movements_on_proveedor_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -65,9 +77,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_223825) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "category_id", null: false
-    t.bigint "proveedor_id", null: false
+    t.integer "cantidadMInima"
     t.index ["category_id"], name: "index_products_on_category_id"
-    t.index ["proveedor_id"], name: "index_products_on_proveedor_id"
   end
 
   create_table "proveedors", force: :cascade do |t|
@@ -89,7 +100,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_223825) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "movements", "clients"
   add_foreign_key "movements", "products"
+  add_foreign_key "movements", "proveedors"
   add_foreign_key "products", "categories"
-  add_foreign_key "products", "proveedors"
 end

@@ -75,6 +75,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @movement = Movement.new(movement_params)
     @movement.product_id = @product.id
+
     if @movement.save
       redirect_to products_url, notice: "Se ha creado un Movimiento Correctamente."
     else
@@ -86,7 +87,7 @@ class ProductsController < ApplicationController
   private
 
   def movement_params
-    params.require(:movement).permit(:quantity, :movement_type, :comment, :fecha_expiracion)
+    params.require(:movement).permit(:quantity, :movement_type, :proveedor_id, :client_id, :comment, :fecha_expiracion)
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -96,6 +97,6 @@ class ProductsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def product_params
-    params.require(:product).permit(:nombre, :descripcion, :foto, :category_id, :proveedor_id)
+    params.require(:product).permit(:nombre, :descripcion, :foto, :category_id, :cantidadMInima)
   end
 end

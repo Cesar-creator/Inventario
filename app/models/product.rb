@@ -5,7 +5,6 @@ class Product < ApplicationRecord
   validates :nombre, presence: true
 
   belongs_to :category
-  belongs_to :proveedor
 
   def quantity
     total = 0

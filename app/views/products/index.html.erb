@@ -24,10 +24,10 @@
               Cantidad 
             </th>
             <th scope="col" class="px-6 py-3">
-              Categoria
+              Cantidad Minima 
             </th>
             <th scope="col" class="px-6 py-3">
-              Proveedor
+              Categoria
             </th>
             <th scope="col" class="px-6 py-3 text-center">
               Acciones
@@ -47,10 +47,10 @@
                 <%= product.quantity%>
               </td>
               <td class="px-6 py-4">
-                <%= search_cat_name(product.category_id) %>
+                <%= product.cantidadMInima%>
               </td>
               <td class="px-6 py-4">
-                <%= search_provider_name(product.proveedor_id) %>
+                <%= search_cat_name(product.category_id) %>
               </td>
               <td class="px-6 py-4 flex">
                 <div class="flex">
@@ -64,7 +64,6 @@
       turbo_method: :delete,
       turbo_confirm: "¿Estás Seguro?"
     }, class: " ml-1 hover:text-indigo-600" if Current.user&.admin?%>
-                    <%= link_to "Comprar", edit_product_path(product), class: "mr-1 ml-1 hover:text-indigo-600", data: {turbo_frame: "modal"} if Current.user&.admin?%>
                   </div>
                 </div>
               </td>
